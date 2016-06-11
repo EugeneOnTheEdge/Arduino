@@ -1,36 +1,26 @@
-#include <RFID.h>
 #include <LiquidCrystal_I2C.h>
-#include <LCD.h>
 #include <Wire.h>
 #include <dht.h>
-#include <SPI.h>
 
 #define dht_apin A2
 #define SS_PIN 10
 #define RST_PIN 9
 
 dht DHT;
-//                    addr, en,rw,rs,d4,d5,d6,d7,bl,blpol
 LiquidCrystal_I2C lcdScreen(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
+//                          addr, en,rw,rs,d4,d5,d6,d7,bl,blpol
+
 int buzzer = 5;
 int redLED = 6;
 int greenLED = 7;
 
-RFID rfid(SS_PIN, RST_PIN);
-int serNum[5];
-int cards[][5] = { {22,166,21,59,158} }; //accepted cards
-bool access = false;
-
 int getTemp = DHT.temperature;
 int getHumid = DHT.humidity;
-bool once = true;
 int lowTemp = 99;
 int lowHumid = 99;
 
 void initDevices() {
   Serial.begin(9600); // Make sure your serial is running on 9600baud
-  SPI.begin();
-  rfid.init();  
   lcdScreen.backlight();
   pinMode(redLED,OUTPUT);
   pinMode(greenLED,OUTPUT);
@@ -68,10 +58,10 @@ void setup(){
   int dot = 0;
           
   for ( dot = 0 ; dot <= 20 ; dot++ )
-     {
-        lcdScreen.print(".");
-        delay(100);
-     } 
+  {
+    lcdScreen.print(".");
+    delay(100);
+  } 
 }
 
 void loop() {
