@@ -1,35 +1,15 @@
 #include <Tone.h>
-
 #include <LiquidCrystal_I2C.h>
-
-LiquidCrystal_I2C lcdScreen(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
-Tone buzzer;
- 
 #include <SPI.h>
 #include <RFID.h>
- 
 #define SS_PIN 53
 #define RST_PIN 5
-
-int serNum[5];
-int yellow = 6;
-int green = 7;
-int red = 8;
-int a;
- 
 //----------------STEPPER MOTOR---------------------------------
 #define IN1  10
 #define IN2  11
 #define IN3  12
 #define IN4  13
-
-int Steps = 0;
-bool Direction = true;
-unsigned long last_time;
-unsigned long currentMillis ;
-int steps_left; // 4095 for full 360 deg
-long time;
-int setAngle = 90;
+//-----------------------------
 
 void SetDirection(){
   if(Direction==1){ Steps++;}
@@ -122,15 +102,31 @@ void turnMotor(int angle)
   // steps_left=1024; // 90deg
 }
 //----------------------------------------------------------------
- 
+LiquidCrystal_I2C lcdScreen(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
+Tone buzzer;
+
+int serNum[5];
+int yellow = 6;
+int green = 7;
+int red = 8;
+int a;
+int Steps = 0;
+bool Direction = true;
+unsigned long last_time;
+unsigned long currentMillis ;
+int steps_left; // 4095 for full 360 deg
+long time;
+int setAngle = 90;
+
 RFID rfid(SS_PIN,RST_PIN);
- 
+
+//This is your card's UID which the system recognizes so it opens the door.
 int cards[][5] = {
   {215,214,231,117,147},  //Card
-  {136,4,177,228,217} // Compass ticket
+  {136,4,177,228,217} //Card2
 };
 
-String names[] = {"Card","Compass"};
+String names[] = {"Card","Card2"};
 
 bool access = false;
  
@@ -143,13 +139,13 @@ void setup(){
     
     buzzer.begin(45);
     SPI.begin(); //SPI MUST ALWAYS COMES FIRST,
-    rfid.init(); // RFID.INIT 2ND
+    rfid.init(); // RFID.INIT 2ND ; otherwise an error will occur (which I still dunno why)
 
     pinMode(red,OUTPUT); 
     pinMode(green,OUTPUT);
     pinMode(yellow,OUTPUT);
     
-    
+    //-----This is just for the sake of 'fun' and yeah-----
     for (int xi = 0; xi < 3 ; xi++ )
     {
       digitalWrite(red,HIGH);
@@ -223,7 +219,7 @@ void setup(){
     buzzer.play(1000,250);
     delay(1000);
     
-    
+    //------------------------------------------
     
     digitalWrite(green,LOW);
     delay(150);
@@ -345,8 +341,5 @@ void loop(){
            digitalWrite(green,LOW);
        }        
     }
-    
     rfid.halt();
-
 }
-
