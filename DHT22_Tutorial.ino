@@ -6,12 +6,14 @@
 #include <DHT.h>
 #include <SPI.h>
 
-#define dht_apin A2
 #define SS_PIN 10
 #define RST_PIN 9
 
-#define DHTPIN A2     // what digital pin we're connected to                           
+#define DHTPIN A2     // what ANALOG pin it is connected to                           
 #define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321 ; DHTTYPE DHT11   // DHT 11
+/*
+  DHT 11 is an older version of DHT temp & humidity sensor. DHT 22 is more precise and accurate, but it is more expensive.
+*/
                         
 DHT DHT(DHTPIN, DHTTYPE);
 LiquidCrystal_I2C lcdScreen(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
