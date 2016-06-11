@@ -9,6 +9,7 @@
 dht DHT;
 LiquidCrystal_I2C lcdScreen(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 //                          addr, en,rw,rs,d4,d5,d6,d7,bl,blpol
+// THIS IS BASED ON A 1602 LCD MODULE.
 
 int buzzer = 5;
 int redLED = 6;
