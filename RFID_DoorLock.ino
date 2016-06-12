@@ -25,7 +25,9 @@
     Yellow LED: 6
     Green LED: 7
     
-  Don't forget to change the UID of the cards which the Arduino accepts. Scroll down and you'll see a huge line break, and you'll see int cards[][5].
+  Don't forget to change the UID of the cards which the Arduino accepts. Scroll down and you'll see a huge line break, and you'll see int cards[][5]. Change my UIDs to yours and upload this code to your Arduino Mega2560 with everything connected as stated and you're good to go!
+  
+  NOTE: I give permissions to reproduce and redistribute this code, but don't forget to give credits! Kudos!
 */
 
 #include <Tone.h>
