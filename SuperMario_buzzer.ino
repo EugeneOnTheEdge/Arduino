@@ -1,10 +1,12 @@
 #include <Tone.h>
 
+#define buzzerPIN 45 // Change this to the pin your passive buzzer is connected to
+
 Tone tone1;
 
 void setup()
 {
-tone1.begin(45);//Playback on Pin 11, change to whatever you may need
+tone1.begin(buzzerPIN);
 }
 
 void loop()
