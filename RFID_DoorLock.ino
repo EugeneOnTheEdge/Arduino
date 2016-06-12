@@ -1,3 +1,33 @@
+/*
+  This is my physical  Arduino setup:
+  
+  Arduino board: Mega2560
+  RFID RFID-RC522/522A connections:
+    SDA: 53
+    SCK: 52
+    MOSI: 51
+    MISO: 50
+    IRQ: [leave unconnected]
+    GND: GND
+    RST: 5
+    3.3V: 3.3V
+  
+  Stepper motor 28BYJ-48 *board* connections:
+    +: 5V
+    -: GND
+    IN1: 10
+    IN2: 11
+    IN3: 12
+    IN4: 13
+  
+  Arduino > miscellaneous stuffs connections:
+    Red LED: 8
+    Yellow LED: 6
+    Green LED: 7
+    
+  Don't forget to change the UID of the cards which the Arduino accepts. Scroll down and you'll see a huge line break, and you'll see int cards[][5].
+*/
+
 #include <Tone.h>
 #include <LiquidCrystal_I2C.h>
 #include <SPI.h>
@@ -120,11 +150,22 @@ int setAngle = 90;
 
 RFID rfid(SS_PIN,RST_PIN);
 
+
+
+
+
+
 //This is your card's UID which the system recognizes so it opens the door.
-int cards[][5] = {
+// CHANGE THE VALUEs ACCORDING TO YOUR CARD's UID! These are my cards' UID, so it'll not work with your cards.
+// int cards[][x]; x represents the number of different amount of accepted cards.
+int cards[][2] = {
   {215,214,231,117,147},  //Card
-  {136,4,177,228,217} //Card2
+  {136,4,177,228,217} // Card2
 };
+
+
+
+
 
 String names[] = {"Card","Card2"};
 
